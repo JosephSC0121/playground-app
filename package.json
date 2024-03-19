@@ -23,7 +23,12 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@monaco-editor/react": "^4.6.0",
+    "@mui/icons-material": "^5.15.13",
+    "@mui/material": "^5.15.13",
+    "@nextui-org/react": "^2.2.10",
     "@tailwindcss/typography": "^0.5.10",
     "axios": "^1.6.8",
     "jwt-decode": "^4.0.0",
