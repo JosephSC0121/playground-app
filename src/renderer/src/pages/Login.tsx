@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { login } from '../api/api'
-import { jwtDecode } from 'jwt-decode'
-import { UserContext } from '@renderer/context/UserContext'
+import { TokenContext } from '@renderer/context/TokenContext'
 import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error] = useState<string | null>(null)
-  const { setUserInfo } = useContext(UserContext)
+  const { setTokenInfo } = useContext(TokenContext)
   const navigate = useNavigate()
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,13 +21,11 @@ function Login() {
     event.preventDefault()
 
     try {
-      const userData = await login(username, password)
-      const decodedToken: any = jwtDecode(userData.access_token)
-      const sub: string = decodedToken.sub
-      const id: number = decodedToken.id
-      const level: number = decodedToken.level
-
-      setUserInfo({ username: sub, id: id, level: level })
+      const tokenData = await login(username, password)
+      setTokenInfo({
+        access_token: tokenData.access_token,
+        token_type: tokenData.token_type
+      })
       navigate('/main')
     } catch (error) {
       console.log('Error: No se pudo decodificar el token JWT.')

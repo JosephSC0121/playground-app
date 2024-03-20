@@ -2,8 +2,8 @@ import * as React from 'react'
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import { useContext } from 'react'
 import { UserContext } from '@renderer/context/UserContext'
+import { useContext } from 'react'
 
 interface LinearWithValueLabelProps {
   value: number
@@ -47,14 +47,14 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 }
 
 export default function LinearProgressFromUser(): JSX.Element {
-  const { userInfo } = useContext(UserContext)
-  const [progress, setProgress] = React.useState(userInfo?.level || 0)
+  const { user } = useContext(UserContext)
+  const [progress, setProgress] = React.useState(user?.level || 0)
 
   React.useEffect(() => {
-    if (userInfo?.level !== undefined && userInfo?.level !== null) {
-      setProgress(userInfo.level)
+    if (user?.level !== undefined && user?.level !== null) {
+      setProgress(user.level)
     }
-  }, [userInfo?.level])
+  }, [user?.level])
 
   return <LinearWithValueLabel value={progress} />
 }

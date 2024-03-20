@@ -1,27 +1,30 @@
 import React, { createContext, useState, ReactNode } from 'react'
 
-interface UserInfo {
-  username: string
+interface User {
   id: number
+  nombres: string
+  apellidos: string
+  aboutme: string
+  username: string
   level: number
 }
 
 interface UserContextType {
-  userInfo: UserInfo | null
-  setUserInfo: (userInfo: UserInfo | null) => void
+  user: User | null
+  setUser: (user: User) => void
 }
 
 const initialUserContext: UserContextType = {
-  userInfo: null,
-  setUserInfo: () => {}
+  user: null,
+  setUser: () => {}
 }
 
 const UserContext = createContext<UserContextType>(initialUserContext)
 
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
+  const [user, setUser] = useState<User | null>(null)
 
-  return <UserContext.Provider value={{ userInfo, setUserInfo }}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
 }
 
 export { UserContext, UserProvider }

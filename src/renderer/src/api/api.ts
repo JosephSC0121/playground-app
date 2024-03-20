@@ -8,25 +8,30 @@ const api = axios.create({
 })
 
 interface UserData {
+  id: number
+  nombres: string
+  apellidos: string
+  aboutme: string
+  username: string
+  level: number
+}
+
+interface TokenData {
   access_token: string
   token_type: string
 }
 
-export const login = async (username: string, password: string): Promise<UserData> => {
+export const login = async (username: string, password: string): Promise<TokenData> => {
   try {
     const formData = new FormData()
     formData.append('username', username)
     formData.append('password', password)
 
-    const response: AxiosResponse<UserData> = await axios.post(
-      'http://localhost:8000/auth/token',
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+    const response: AxiosResponse<TokenData> = await api.post('/auth/token', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
-    )
+    })
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -44,6 +49,28 @@ export const login = async (username: string, password: string): Promise<UserDat
     } else {
       // Otro tipo de error, como un error de red
       throw new Error('Error de red al intentar iniciar sesión')
+    }
+  }
+}
+export const getUserData = async (accessToken: string): Promise<UserData> => {
+  try {
+    const response: AxiosResponse<UserData> = await api.get('/user/user', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return response.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response) {
+        throw new Error(error.response.data.message || 'Error al obtener datos del usuario')
+      } else if (error.request) {
+        throw new Error('No se recibió respuesta del servidor')
+      } else {
+        throw new Error('Error durante la configuración de la solicitud')
+      }
+    } else {
+      throw new Error('Error de red al intentar obtener datos del usuario')
     }
   }
 }
