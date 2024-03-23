@@ -6,6 +6,7 @@ interface User {
   apellidos: string
   aboutme: string
   username: string
+  email : string
   level: number
 }
 

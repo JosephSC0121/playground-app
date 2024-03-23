@@ -18,6 +18,7 @@ const handleData = async () => {
     nombres: userData.nombres,
     apellidos: userData.apellidos,
     aboutme: userData.aboutme,
+    email: userData.email,
     username: userData.username,
     level: userData.level
   })

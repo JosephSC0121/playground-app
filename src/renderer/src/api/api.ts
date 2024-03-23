@@ -13,6 +13,7 @@ interface UserData {
   apellidos: string
   aboutme: string
   username: string
+  email: string
   level: number
 }
 
