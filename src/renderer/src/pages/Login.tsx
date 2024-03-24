@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { login } from '../api/api'
 import { TokenContext } from '@renderer/context/TokenContext'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Login() {
   const [username, setUsername] = useState('')
@@ -79,7 +80,9 @@ function Login() {
           <div className="py-4 text-center text-gray-400">
             ¿No tienes cuenta?
             <br />
+            <Link to="/register" className="py-4 font-bold text-black">
             <span className="py-4 font-bold text-black">¡Registrate gratis!</span>
+            </Link>
           </div>
         </div>
         <div className="relative">

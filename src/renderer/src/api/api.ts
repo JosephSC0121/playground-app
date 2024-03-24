@@ -7,6 +7,14 @@ const api = axios.create({
   timeout: 5000
 })
 
+interface UserRegister {
+  nombres: string
+  apellidos: string
+  email: string
+  username: string
+  password: string
+}
+
 interface UserData {
   id: number
   nombres: string
@@ -72,6 +80,47 @@ export const getUserData = async (accessToken: string): Promise<UserData> => {
       }
     } else {
       throw new Error('Error de red al intentar obtener datos del usuario')
+    }
+  }
+}
+export const registerUser = async (
+  nombres: string,
+  apellidos: string,
+  email: string,
+  username: string,
+  password: string
+): Promise<UserRegister> => {
+  try {
+    // Realizar la solicitud de registro de usuario
+    const response: AxiosResponse<UserRegister> = await api.post('/auth/', {
+      nombres,
+      apellidos,
+      email,
+      username,
+      password
+    })
+
+    // Devolver los datos de la respuesta
+    return response.data
+  } catch (error) {
+    // Manejar errores de la solicitud
+    if (axios.isAxiosError(error)) {
+      // Manejar errores específicos de Axios
+      if (error.response) {
+        // El servidor respondió con un estado de error
+        throw new Error(error.response.data.message || 'Error al registrar usuario')
+      } else if (error.request) {
+        // La solicitud se realizó pero no se recibió respuesta
+        throw new Error('No se recibió respuesta del servidor al intentar registrar usuario')
+      } else {
+        // Ocurrió un error durante la configuración de la solicitud
+        throw new Error(
+          'Error durante la configuración de la solicitud al intentar registrar usuario'
+        )
+      }
+    } else {
+      // Otro tipo de error, como un error de red
+      throw new Error('Error de red al intentar registrar usuario')
     }
   }
 }
