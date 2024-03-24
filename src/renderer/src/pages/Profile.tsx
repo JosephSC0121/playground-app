@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import { UserContext } from '@renderer/context/UserContext'
 import { getUserData } from '@renderer/api/api'
 import { TokenContext } from '@renderer/context/TokenContext'
@@ -6,27 +6,30 @@ import { TokenContext } from '@renderer/context/TokenContext'
 import Sidebar from '@renderer/components/Sidebar'
 import Level from '@renderer/components/Level'
 
-const handleData = async () => {
-  const { setUser } = useContext(UserContext)
+function Profile(): JSX.Element {
+  const { user, setUser } = useContext(UserContext)
   const { tokenInfo } = useContext(TokenContext)
 
-  const token = tokenInfo?.access_token
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = tokenInfo?.access_token
 
-  const userData = await getUserData(token!)
-  setUser({
-    id: userData.id,
-    nombres: userData.nombres,
-    apellidos: userData.apellidos,
-    aboutme: userData.aboutme,
-    email: userData.email,
-    username: userData.username,
-    level: userData.level
-  })
-}
+      if (token) {
+        const userData = await getUserData(token)
+        setUser({
+          id: userData.id,
+          nombres: userData.nombres,
+          apellidos: userData.apellidos,
+          aboutme: userData.aboutme,
+          email: userData.email,
+          username: userData.username,
+          level: userData.level
+        })
+      }
+    }
 
-function Profile(): JSX.Element {
-  const { user } = useContext(UserContext)
-  handleData()
+    fetchData()
+  }, [])
   return (
     <div className="bg-primary flex justify-center items-center h-screen">
       <Sidebar />
