@@ -81,7 +81,7 @@ function Login() {
             ¿No tienes cuenta?
             <br />
             <Link to="/register" className="py-4 font-bold text-black">
-            <span className="py-4 font-bold text-black">¡Registrate gratis!</span>
+              <span className="py-4 font-bold text-black">¡Registrate gratis!</span>
             </Link>
           </div>
         </div>

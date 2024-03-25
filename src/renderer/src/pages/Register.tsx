@@ -63,7 +63,7 @@ function Register() {
           <img
             src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGI4NHlvb2p5NHhic200YWE1OG9yOHQyN21sM2JmYnFjaXM2emhvbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/scZPhLqaVOM1qG4lT9/giphy.gif"
             alt="img"
-            className="w-[400px] h-full hidden rounded-l-2xl md:block object-cover"
+            className="w-[500px] h-full hidden rounded-l-2xl md:block object-cover"
           />
           <div className="absolute hidden bottom-10 right-6 p-6 bg-white bg-opacity-30 backdrop-blur-sm rounded drop-shadow-lg md:block"></div>
         </div>
