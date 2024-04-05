@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { login } from '../api/api'
+import { login } from '../services/AuthService'
 import { TokenContext } from '@renderer/context/TokenContext'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'

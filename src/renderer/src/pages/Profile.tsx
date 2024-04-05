@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react'
 import { UserContext } from '@renderer/context/UserContext'
-import { getUserData } from '@renderer/api/api'
+import { getUserData } from '../services/UserService'
 import { TokenContext } from '@renderer/context/TokenContext'
 
 import Sidebar from '@renderer/components/Sidebar'
