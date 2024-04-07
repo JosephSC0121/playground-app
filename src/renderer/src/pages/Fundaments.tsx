@@ -5,7 +5,9 @@ function Fundaments() {
   return (
     <div>
       <SideBar />
-      <BasicTable />
+      <div>
+        <BasicTable />
+      </div>
     </div>
   )
 }

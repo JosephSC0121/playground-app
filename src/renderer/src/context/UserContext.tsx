@@ -1,18 +1,9 @@
 import React, { createContext, useState, ReactNode } from 'react'
-
-interface User {
-  id: number
-  nombres: string
-  apellidos: string
-  aboutme: string
-  username: string
-  email: string
-  level: number
-}
+import { UserData } from '@renderer/interfaces/userInterfaces'
 
 interface UserContextType {
-  user: User | null
-  setUser: (user: User) => void
+  user: UserData | null
+  setUser: (user: UserData) => void
 }
 
 const initialUserContext: UserContextType = {
@@ -23,7 +14,7 @@ const initialUserContext: UserContextType = {
 const UserContext = createContext<UserContextType>(initialUserContext)
 
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<UserData | null>(null)
 
   return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
 }

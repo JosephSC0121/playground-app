@@ -1,50 +1,47 @@
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import React, { useState, useEffect, useContext } from 'react'
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react'
+import { TokenContext } from '@renderer/context/TokenContext'
+import { getExercises } from '@renderer/services/ExercisesService'
+import { Exercises } from '@renderer/interfaces/ExerciseInterface'
 
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein }
-}
+export default function App() {
+  const { tokenInfo } = useContext(TokenContext)
+  const [exercisesData, setExercisesData] = useState<Exercises[]>([])
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9)
-]
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = tokenInfo?.access_token
+      if (token) {
+        try {
+          const data = await getExercises(token, 'fundamentos')
+          setExercisesData(data)
+        } catch (error) {
+          console.error('Error fetching exercises:', error)
+        }
+      }
+    }
 
-export default function BasicTable() {
+    fetchData()
+  }, [])
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
+    <div>
+      <Table aria-label="Example static collection table">
+        <TableHeader>
+          <TableColumn>Titulo</TableColumn>
+          <TableColumn>Dificultad</TableColumn>
+          <TableColumn>Lenguaje</TableColumn>
+        </TableHeader>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+          {exercisesData.map((exercise, index) => (
+            <TableRow key={index}>
+              <TableCell>{exercise.title}</TableCell>
+              <TableCell>{exercise.dificulty}</TableCell>
+              <TableCell>{exercise.languaje}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </div>
   )
 }

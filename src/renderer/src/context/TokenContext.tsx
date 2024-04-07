@@ -1,13 +1,9 @@
 import React, { createContext, useState, ReactNode } from 'react'
-
-interface TokenInfo {
-  access_token: string
-  token_type: string
-}
+import { TokenData } from '@renderer/interfaces/authInterfaces'
 
 interface TokenContextType {
-  tokenInfo: TokenInfo | null
-  setTokenInfo: (token: TokenInfo) => void
+  tokenInfo: TokenData | null
+  setTokenInfo: (token: TokenData) => void
 }
 
 const initialTokenContext: TokenContextType = {
@@ -18,7 +14,7 @@ const initialTokenContext: TokenContextType = {
 const TokenContext = createContext<TokenContextType>(initialTokenContext)
 
 const TokenProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [tokenInfo, setTokenInfo] = useState<TokenInfo | null>(null)
+  const [tokenInfo, setTokenInfo] = useState<TokenData | null>(null)
   return (
     <TokenContext.Provider value={{ tokenInfo, setTokenInfo }}>{children}</TokenContext.Provider>
   )
