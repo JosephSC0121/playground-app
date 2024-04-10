@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react'
 import { TokenContext } from '@renderer/context/TokenContext'
 import { getExercises } from '@renderer/services/ExercisesService'
