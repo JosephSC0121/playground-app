@@ -7,7 +7,7 @@ import Profile from './pages/Profile'
 import Register from './pages/Register'
 import Settings from './pages/Settings'
 import Fundaments from './pages/Fundaments'
-
+import Exercise from './pages/Exercise'
 function App(): JSX.Element {
   return (
     <Router>
@@ -20,6 +20,7 @@ function App(): JSX.Element {
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/fundamentos" element={<Fundaments />} />
+            <Route path="/exercise/:exercise" Component={Exercise} />
           </Routes>
         </TokenProvider>
       </UserProvider>
