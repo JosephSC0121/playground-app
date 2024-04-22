@@ -4,9 +4,9 @@ export function CodeEditor() {
   return (
     <div className="w-1/2">
       <Editor
-        height="90vh"
-        defaultLanguage="javascript"
-        defaultValue="// some comment"
+        height="120vh"
+        defaultLanguage="python"
+        defaultValue="// Escribe aquí tu código!!!"
         theme="vs-dark"
       />
     </div>

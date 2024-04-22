@@ -1,32 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { TokenContext } from '../context/TokenContext'; // Reemplaza con la ubicación correcta de tu TokenContext
-import { getExercises } from '../services/ExercisesService'; // Reemplaza con la ubicación correcta de tu ExercisesService
-import { Exercises } from '@renderer/interfaces/ExerciseInterface';
+import { useState, useEffect, useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { TokenContext } from '../context/TokenContext' // Reemplaza con la ubicación correcta de tu TokenContext
+import { getExercises } from '../services/ExercisesService' // Reemplaza con la ubicación correcta de tu ExercisesService
+import { Exercises } from '@renderer/interfaces/ExerciseInterface'
 
 export default function App() {
-  const { tokenInfo } = useContext(TokenContext);
-  const [exercisesData, setExercisesData] = useState<Exercises[]>([]);
+  const { tokenInfo } = useContext(TokenContext)
+  const [exercisesData, setExercisesData] = useState<Exercises[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = tokenInfo?.access_token;
+      const token = tokenInfo?.access_token
       if (token) {
         try {
-          const data = await getExercises(token, 'fundamentos');
-          setExercisesData(data);
+          const data = await getExercises(token, 'fundamentos')
+          setExercisesData(data)
         } catch (error) {
-          console.error('Error fetching exercises:', error);
+          console.error('Error fetching exercises:', error)
         }
       }
-    };
+    }
 
-    fetchData();
-  }, [tokenInfo]); // Agrega tokenInfo como dependencia para que useEffect se ejecute cuando cambie
+    fetchData()
+  }, [tokenInfo]) // Agrega tokenInfo como dependencia para que useEffect se ejecute cuando cambie
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <table className="min-w-full">
+    <div className="bg-primary max-w-4xl mx-auto">
+      <table className=" bg-primary min-w-full">
         <thead>
           <tr>
             <th className="px-8 py-4 bg-gray-50 text-left text-xl leading-5 font-medium text-gray-500 uppercase tracking-wider">
@@ -49,11 +49,11 @@ export default function App() {
                 </Link>
               </td>
               <td className="px-6 py-4 whitespace-no-wrap text-right">{exercise.dificulty}</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-right">{exercise.languaje}</td> {/* Corrige la propiedad 'languaje' a 'language' */}
+              <td className="px-6 py-4 whitespace-no-wrap text-right">{exercise.languaje}</td>{' '}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
+  )
 }
