@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Profile from './pages/Profile'
 import Register from './pages/Register'
 import Settings from './pages/Settings'
-import Fundaments from './pages/Fundaments'
 import Exercise from './pages/Exercise'
+import BasicTable from './pages/Table'
 function App(): JSX.Element {
   return (
     <Router>
@@ -16,10 +16,10 @@ function App(): JSX.Element {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/main" element={<MainPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/fundamentos" element={<Fundaments />} />
+            <Route path="/main" element={<MainPage />} />
+            <Route path="/:theme" Component={BasicTable} />
             <Route path="/exercise/:exercise" Component={Exercise} />
           </Routes>
         </TokenProvider>

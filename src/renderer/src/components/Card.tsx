@@ -20,6 +20,7 @@ export default function BottomActionsCard() {
           title="Custom Title"
           content="Custom Content"
           image="https://i.pinimg.com/564x/91/5b/c8/915bc855b3b1dc43f7d1bcd784386863.jpg"
+          link="/poo"
         />
         <ActionAreaCard
           title="Custom Title"

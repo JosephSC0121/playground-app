@@ -1,31 +1,15 @@
-import { useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { TokenContext } from '../context/TokenContext' // Reemplaza con la ubicación correcta de tu TokenContext
-import { getExercises } from '../services/ExercisesService' // Reemplaza con la ubicación correcta de tu ExercisesService
-import { Exercises } from '@renderer/interfaces/ExerciseInterface'
+import { usePage } from '@renderer/hooks/usePage'
+import { Link, useParams } from 'react-router-dom'
+import SideBar from '@renderer/components/Sidebar'
 
-export default function App() {
-  const { tokenInfo } = useContext(TokenContext)
-  const [exercisesData, setExercisesData] = useState<Exercises[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = tokenInfo?.access_token
-      if (token) {
-        try {
-          const data = await getExercises(token, 'fundamentos')
-          setExercisesData(data)
-        } catch (error) {
-          console.error('Error fetching exercises:', error)
-        }
-      }
-    }
-
-    fetchData()
-  }, [tokenInfo]) // Agrega tokenInfo como dependencia para que useEffect se ejecute cuando cambie
+export default function BasicTable() {
+  const { theme } = useParams()
+  const themeToUse = theme ?? '404'
+  const { exercisesData } = usePage(themeToUse)
 
   return (
     <div className="bg-primary max-w-4xl mx-auto">
+      <SideBar />
       <table className=" bg-primary min-w-full">
         <thead>
           <tr>
