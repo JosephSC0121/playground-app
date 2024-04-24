@@ -1,11 +1,16 @@
 import Editor from '@monaco-editor/react'
 
-export function CodeEditor() {
+interface CodeEditorProps {
+  children: string
+}
+
+export function CodeEditor({ children }: CodeEditorProps) {
+  
   return (
     <div className="w-1/2">
       <Editor
-        height="120vh"
-        defaultLanguage="python"
+        height="170vh"
+        defaultLanguage={children}
         defaultValue="// Escribe aquí tu código!!!"
         theme="vs-dark"
       />

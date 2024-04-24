@@ -30,10 +30,10 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
           value={value}
           sx={{
             '& .MuiLinearProgress-bar': {
-              backgroundColor: '#474448' // Cambio de color de la parte azul
+              backgroundColor: '#474448'
             },
             '& .MuiLinearProgress-buffer': {
-              backgroundColor: '#474448' // Cambio de color del buffer (parte no llena de la barra)
+              backgroundColor: '#474448'
             }
           }}
           {...rest}
