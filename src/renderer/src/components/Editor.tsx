@@ -5,7 +5,6 @@ interface CodeEditorProps {
 }
 
 export function CodeEditor({ children }: CodeEditorProps) {
-  
   return (
     <div className="w-1/2">
       <Editor
