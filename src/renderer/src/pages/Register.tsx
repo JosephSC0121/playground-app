@@ -45,13 +45,9 @@ function Register() {
         setError('Las contraseñas no coinciden.')
         return
       }
-
-      // Llama a la función de registro de usuario
       await registerUser(nombres, apellidos, email, username, password)
-      // Si el registro es exitoso, redirige a la página principal
-      navigate('/main')
+      navigate('/')
     } catch (error) {
-      // Maneja los errores de registro
       setError('Error al registrar usuario. Por favor, inténtalo de nuevo.')
     }
   }
