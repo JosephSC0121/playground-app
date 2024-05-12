@@ -12,7 +12,7 @@ function Exercise() {
   return (
     <div className="flex flex-col">
       <Sidebar />
-      <div className="flex">
+      <div className="flex flex-row">
         {data && <MarkdownCard>{data.description}</MarkdownCard>}
         {data && <CodeEditor language={data.languaje}></CodeEditor>}
       </div>
