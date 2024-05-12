@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import api from '@renderer/api/api'
+import { api } from '@renderer/api/api'
 
 import { UserData } from '@renderer/interfaces/userInterfaces'
 

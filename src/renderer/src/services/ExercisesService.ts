@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import api from '@renderer/api/api'
+import { api } from '@renderer/api/api'
 import { Exercises } from '@renderer/interfaces/ExerciseInterface'
 
 export const getExercises = async (accessToken: string, course: string): Promise<Exercises[]> => {

@@ -14,7 +14,7 @@ function Exercise() {
       <Sidebar />
       <div className="flex">
         {data && <MarkdownCard>{data.description}</MarkdownCard>}
-        {data && <CodeEditor>{data.languaje}</CodeEditor>}
+        {data && <CodeEditor language={data.languaje}></CodeEditor>}
       </div>
     </div>
   )

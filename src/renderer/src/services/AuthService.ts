@@ -1,5 +1,5 @@
 import { UserRegister, TokenData } from '@renderer/interfaces/authInterfaces'
-import api from '@renderer/api/api'
+import { api } from '@renderer/api/api'
 import axios, { AxiosResponse } from 'axios'
 
 export const login = async (username: string, password: string): Promise<TokenData> => {
