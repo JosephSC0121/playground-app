@@ -4,7 +4,7 @@ function Settings() {
   return (
     <div>
       <SiderBar />
-      Settingas
+      Settings
     </div>
   )
 }

@@ -8,18 +8,18 @@ export default function BasicTable() {
   const { exercisesData } = usePage(themeToUse)
 
   return (
-    <div className="bg-primary max-w-4xl mx-auto">
+    <div className="bg-primary mx-auto">
       <SideBar />
       <table className=" bg-primary min-w-full">
         <thead>
           <tr>
-            <th className="px-8 py-4 bg-gray-50 text-left text-xl leading-5 font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-4 bg-gray-50 text-left text-xl leading-5 font-medium text-gray-500 uppercase tracking-wider">
               Titulo
             </th>
-            <th className="px-8 py-4 bg-gray-50 text-left text-xl leading-4 font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-4 bg-gray-50 text-left text-xl leading-4 font-medium text-gray-500 uppercase tracking-wider">
               Dificultad
             </th>
-            <th className="px-8 py-4 bg-gray-50 text-left text-xl leading-4 font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-4 bg-gray-50 text-left text-xl leading-4 font-medium text-gray-500 uppercase tracking-wider">
               Lenguaje
             </th>
           </tr>
@@ -32,8 +32,8 @@ export default function BasicTable() {
                   {exercise.title}
                 </Link>
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap text-right">{exercise.dificulty}</td>
-              <td className="px-6 py-4 whitespace-no-wrap text-right">{exercise.languaje}</td>{' '}
+              <td className="px-6 py-4">{exercise.dificulty}</td>
+              <td className="px-6 py-4">{exercise.languaje}</td>{' '}
             </tr>
           ))}
         </tbody>

@@ -5,11 +5,7 @@ interface MarkdownCardProps {
 }
 
 export function MarkdownCard({ children }: MarkdownCardProps) {
-  return (
-    <div className="bg-secondary w-1/2 p-4">
-      <ReactMarkdown className="prose">{children}</ReactMarkdown>
-    </div>
-  )
+  return <ReactMarkdown className="prose">{children}</ReactMarkdown>
 }
 
 export default MarkdownCard
