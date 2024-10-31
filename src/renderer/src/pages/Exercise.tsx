@@ -24,10 +24,22 @@ function Exercise() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="bg-secondary flex flex-col">
       <div className="flex flex-row justify-between">
         <Sidebar />
-        <button onClick={openDialog}>Open Chatbot</button>
+        <div>
+          <button onClick={openDialog}><svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-robot" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M6 4m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+            <path d="M12 2v2" />
+            <path d="M9 12v9" />
+            <path d="M15 12v9" />
+            <path d="M5 16l4 -2" />
+            <path d="M15 14l4 2" />
+            <path d="M9 18h6" />
+            <path d="M10 8v.01" />
+            <path d="M14 8v.01" />
+          </svg></button></div>
       </div>
       <div className="flex flex-row">
         <div className="bg-secondary w-1/2 p-4">
@@ -36,7 +48,7 @@ function Exercise() {
         {data && <CodeEditor language={data.languaje}></CodeEditor>}
       </div>
       <Dialog open={isDialogOpen} onClose={closeDialog} fullWidth={true}>
-          <Chatbot />
+        <Chatbot />
       </Dialog>
     </div>
   );

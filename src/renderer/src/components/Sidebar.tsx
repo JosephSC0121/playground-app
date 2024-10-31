@@ -50,11 +50,6 @@ export default function SwipeableTemporaryDrawer() {
             icon: <AccountCircleRoundedIcon className="text-white" />,
             link: '/profile'
           },
-          {
-            text: 'Configuraciones',
-            icon: <SettingsRoundedIcon className="text-white" />,
-            link: '/settings'
-          }
         ].map((item) => (
           <ListItem key={item.text} disablePadding component={Link} to={item.link}>
             <ListItemIcon>{item.icon}</ListItemIcon>
@@ -64,7 +59,7 @@ export default function SwipeableTemporaryDrawer() {
       </List>
       <List>
         {['Salir'].map((text) => (
-          <ListItem key={text} disablePadding component={Link} to="/logout">
+          <ListItem key={text} disablePadding component={Link} to="/">
             <ListItemIcon>
               <PowerSettingsNewRoundedIcon className="text-white" />
             </ListItemIcon>

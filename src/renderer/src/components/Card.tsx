@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 import Card from '@mui/material/Card';
@@ -43,7 +43,7 @@ export default function BottomActionsCard() {
           loaded={dataLoaded}
         />
         <ActionAreaCard
-          title="Fundamentos de programacion"
+          title="Fundamentos y bases de programación"
           image="https://get.wallhere.com/photo/Python-programming-code-computer-minimalism-1464143.jpg"
           link="/fundamentos"
           loaded={dataLoaded}

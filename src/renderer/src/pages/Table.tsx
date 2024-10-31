@@ -8,9 +8,11 @@ export default function BasicTable() {
   const { exercisesData } = usePage(themeToUse)
 
   return (
-    <div className="bg-primary mx-auto">
+    <div className="bg-primary h-full">
+      <div>
       <SideBar />
-      <table className=" bg-primary min-w-full">
+      </div>
+      <table className="bg-secondary min-w-full">
         <thead>
           <tr>
             <th className="px-6 py-4 bg-gray-50 text-left text-xl leading-5 font-medium text-gray-500 uppercase tracking-wider">

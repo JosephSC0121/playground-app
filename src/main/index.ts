@@ -8,67 +8,91 @@ function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 1280,
     height: 900,
-    show: false,
-    autoHideMenuBar: true,
+    show: false, // La ventana no se muestra inmediatamente
+    autoHideMenuBar: true, // Oculta la barra de menú
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      preload: join(__dirname, '../preload/index.js'), // Cargar script preload
+      sandbox: false, 
+      webSecurity: false, // Deshabilita la seguridad del navegador
+      allowRunningInsecureContent: true
     }
   })
 
+  // Abrir DevTools en producción para depurar
+  if (!is.dev) {
+    mainWindow.webContents.openDevTools()
+  }
+
+  // Mostrar la ventana cuando esté lista
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
 
+  // Prevenir que se abran nuevas ventanas externas
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
 
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
+  // Verificar si se cargan las rutas correctas en dev y producción
+  console.log('Loading renderer from:', 
+    is.dev && process.env['ELECTRON_RENDERER_URL']
+      ? process.env['ELECTRON_RENDERER_URL']
+      : join(__dirname, '../renderer/index.html')
+  )
+
+  // Cargar la URL en desarrollo o el archivo local en producción
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    mainWindow.loadFile(join(__dirname, '../renderer/index.html')).catch((error) => {
+      console.error('Error loading index.html:', error)
+    })
   }
+
+  // Capturar si hubo algún error en la carga
+  mainWindow.webContents.on('did-fail-load', (errorDescription) => {
+    console.error('Failed to load:', errorDescription)
+  })
+
+  // Capturar errores de crash en los webContents
+  mainWindow.webContents.on('crashed', () => {
+    console.error('The web contents have crashed')
+  })
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  // Set app user model id for windows
+  // Establecer el app model ID para Windows
   electronApp.setAppUserModelId('com.electron')
 
-  // Default open or close DevTools by F12 in development
-  // and ignore CommandOrControl + R in production.
-  // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
+  // Habilitar o deshabilitar shortcuts de desarrollo según el entorno
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
+  // Test de IPC para verificar que funciona correctamente
   ipcMain.on('ping', () => console.log('pong'))
 
+  // Crear la ventana principal
   createWindow()
 
+  // Crear nueva ventana si no hay ninguna en macOS al hacer click en el dock
   app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 })
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
+// Cerrar la aplicación cuando todas las ventanas estén cerradas (excepto en macOS)
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
+// Capturar errores globales y loguearlos
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error)
+})
+
+// Este código puede incluir cualquier otro código de proceso principal adicional.

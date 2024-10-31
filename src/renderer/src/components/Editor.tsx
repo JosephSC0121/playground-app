@@ -7,7 +7,9 @@ interface CodeEditorProps {
 
 export function CodeEditor({ language }: CodeEditorProps) {
   const [code, setCode] = useState('')
-  const [output, setOutput] = useState('Output:')
+  const [output, setOutput] = useState('')
+  language = language.toLocaleLowerCase()
+  console.log(language)
   return (
     <main className="flex flex-col w-1/2">
       <div className="w-full flex flex-col gap-2">
