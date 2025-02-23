@@ -1,34 +1,12 @@
-# playground-app
+# Playground User Documentation
 
-An Electron application with React and TypeScript
+## 📖 About Playground
+Playground is an interactive platform designed for learning programming and mathematics. Users can engage with coding exercises, explore fundamental programming concepts, and receive AI-driven assistance.
 
-## Recommended IDE Setup
+---
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## 🔗 Related Projects
+- [Playground Backend](https://github.com/JosephSC0121/playground_docs) - Docs
 
-## Project Setup
+This documentation helps users navigate and maximize their experience on Playground, making learning efficient and interactive!
 
-### Install
-
-```bash
-$ npm install
-```
-
-### Development
-
-```bash
-$ npm run dev
-```
-
-### Build
-
-```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
-```
